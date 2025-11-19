@@ -3,6 +3,7 @@ import { db } from '@/db';
 import { issues } from '@/db/schema';
 import { eq } from 'drizzle-orm';
 
+
 type IssueRouteContext = {
   params: Promise<{ id: string }>;
 };

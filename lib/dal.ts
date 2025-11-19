@@ -6,7 +6,9 @@ import { cacheTag } from 'next/cache';
 import { issues, users } from '@/db/schema';
 import { mockDelay } from './utils';
 
-//mockDelay(700);
+
+export const runtime = 'nodejs'
+mockDelay(700);
 // Current user
 export const getCurrentUser = async () => {
   const session = await getSession();
@@ -59,7 +61,8 @@ export const getUserByEmail = async (email: string) => {
 };
 
 export async function getIssues() {
-  
+  'use cache';
+  cacheTag('issue');
   try {
     const result = await db.query.issues.findMany({
       with: {
