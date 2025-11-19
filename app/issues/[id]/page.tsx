@@ -8,6 +8,7 @@ import Button from '@/app/components/ui/Button';
 import { ArrowLeftIcon, Edit2Icon } from 'lucide-react';
 import DeleteIssueButton from '../../components/DeleteIssueButton';
 
+
 export default async function IssuePage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
   const issue = await getIssue(parseInt(id));
@@ -57,7 +58,7 @@ export default async function IssuePage({ params }: { params: Promise<{ id: stri
           Back to Issues
         </Link>
         <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-          <h1 className="text-3xl font-bold">{title}</h1>
+          <h1 className="text-3xl font-bold text-gray-900 dark:text-white">{title}</h1>
           <div className="flex items-center space-x-2">
             <Link href={`/issues/${id}/edit`}>
               <Button variant="outline" size="sm">
@@ -72,15 +73,15 @@ export default async function IssuePage({ params }: { params: Promise<{ id: stri
         </div>
       </div>
 
-      <div className="bg-white dark:bg-dark-elevated border border-gray-200 dark:border-dark-border-default rounded-lg shadow-sm p-6 mb-8">
+      <div className="bg-white dark:bg-[#1a1a1a] border border-gray-200 dark:border-dark-border-subtle rounded-lg shadow-sm p-6 mb-8">
         <div className="flex flex-wrap gap-3 mb-6">
           <Badge status={status as Status}>{getStatusLabel(status)}</Badge>
           <Badge priority={priority as Priority}>{getPriorityLabel(priority)}</Badge>
-          <div className="text-sm text-gray-500">
+          <div className="text-sm text-gray-500 dark:text-gray-400">
             Created {formatRelativeTime(new Date(createdAt))}
           </div>
           {updatedAt !== createdAt && (
-            <div className="text-sm text-gray-500">
+            <div className="text-sm text-gray-500 dark:text-gray-400">
               Updated {formatRelativeTime(new Date(updatedAt))}
             </div>
           )}
@@ -91,28 +92,30 @@ export default async function IssuePage({ params }: { params: Promise<{ id: stri
             <p className="whitespace-pre-line">{description}</p>
           </div>
         ) : (
-          <p className="text-gray-500 italic">No description provided.</p>
+          <p className="text-gray-500 dark:text-gray-400 italic">No description provided.</p>
         )}
       </div>
 
-      <div className="bg-white dark:bg-dark-elevated border border-gray-200 dark:border-dark-border-default rounded-lg shadow-sm p-6">
-        <h2 className="text-lg font-medium mb-2">Details</h2>
+      <div className="bg-white dark:bg-[#1a1a1a] border border-gray-200 dark:border-dark-border-subtle rounded-lg shadow-sm p-6">
+        <h2 className="text-lg font-medium mb-2 text-gray-900 dark:text-white">Details</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
-            <p className="text-sm font-medium text-gray-500 mb-1">Assigned to</p>
-            <p>{user.email}</p>
+            <p className="text-sm font-medium text-gray-500 dark:text-gray-400 mb-1">Assigned to</p>
+            <p className="text-gray-900 dark:text-white">{user.email}</p>
           </div>
           <div>
-            <p className="text-sm font-medium text-gray-500 mb-1">Status</p>
+            <p className="text-sm font-medium text-gray-500 dark:text-gray-400 mb-1">Status</p>
             <Badge status={status as Status}>{getStatusLabel(status)}</Badge>
           </div>
           <div>
-            <p className="text-sm font-medium text-gray-500 mb-1">Priority</p>
+            <p className="text-sm font-medium text-gray-500 dark:text-gray-400 mb-1">Priority</p>
             <Badge priority={priority as Priority}>{getPriorityLabel(priority)}</Badge>
           </div>
           <div>
-            <p className="text-sm font-medium text-gray-500 mb-1">Created</p>
-            <p>{formatRelativeTime(new Date(createdAt))}</p>
+            <p className="text-sm font-medium text-gray-500 dark:text-gray-400 mb-1">Created</p>
+            <p className="text-gray-900 dark:text-white">
+              {formatRelativeTime(new Date(createdAt))}
+            </p>
           </div>
         </div>
       </div>

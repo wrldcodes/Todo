@@ -2,6 +2,13 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 
 ## Getting Started
 
+## Environment Variables
+
+1. Copy `env.example` to `.env.local`.
+2. Update `JWT_SECRET` with a unique string (at least 32 characters).
+
+## Getting Started
+
 First, run the development server:
 
 ```bash

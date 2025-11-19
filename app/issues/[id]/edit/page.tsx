@@ -3,6 +3,7 @@ import IssueForm from '@/app/components/IssueForm';
 import { ArrowLeftIcon } from 'lucide-react';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
+
 export default async function EditIssuePage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
 
@@ -22,9 +23,9 @@ export default async function EditIssuePage({ params }: { params: Promise<{ id: 
         Back to Issue
       </Link>
 
-      <h1 className="text-2xl font-bold mb-6">Edit Issue</h1>
+      <h1 className="text-2xl font-bold mb-6 text-gray-900 dark:text-white">Edit Issue</h1>
 
-      <div className="bg-white dark:bg-dark-elevated border border-gray-200 dark:border-dark-border-default rounded-lg shadow-sm p-6">
+      <div className="bg-white dark:bg-[#1a1a1a] border border-gray-200 dark:border-dark-border-subtle rounded-lg shadow-sm p-6">
         <IssueForm userId={issue.userId} issue={issue} isEditing />
       </div>
     </div>

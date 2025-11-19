@@ -14,9 +14,9 @@ export default async function NewIssuePage() {
         Back to Dashboard
       </Link>
 
-      <h1 className="text-2xl font-bold mb-6">Create New Issue</h1>
+      <h1 className="text-2xl font-bold mb-6 text-gray-900 dark:text-white">Create New Issue</h1>
 
-      <div className="bg-white dark:bg-dark-elevated border border-gray-200 dark:border-dark-border-default rounded-lg shadow-sm p-6">
+      <div className="bg-white dark:bg-[#1a1a1a] border border-gray-200 dark:border-dark-border-subtle rounded-lg shadow-sm p-6">
         <Suspense fallback={<div>Loading...</div>}>
           <NewIssue />
         </Suspense>

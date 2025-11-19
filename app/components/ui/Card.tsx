@@ -15,7 +15,7 @@ export function Card({
   return (
     <div
       className={cn(
-        'rounded-lg border border-gray-200 bg-white shadow-sm dark:border-dark-border-default dark:bg-dark-high',
+        'rounded-lg border border-gray-200 bg-white shadow-sm dark:border-dark-border-subtle dark:bg-[#121212]',
         hoverable && 'transition-shadow hover:shadow-md',
         className
       )}

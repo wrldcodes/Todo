@@ -44,7 +44,7 @@ export default function IssueCard({ issue }: IssueCardProps) {
     <Link href={`/issues/${id}`}>
       <Card className="h-full hover:shadow-md transition-shadow cursor-pointer">
         <CardHeader className="pb-2">
-          <CardTitle className="line-clamp-1 text-base">{title}</CardTitle>
+          <CardTitle className="line-clamp-1 text-base text-gray-900 dark:text-white">{title}</CardTitle>
         </CardHeader>
         <CardContent className="pb-2">
           {description && (
@@ -59,7 +59,7 @@ export default function IssueCard({ issue }: IssueCardProps) {
             </Badge>
           </div>
         </CardContent>
-        <CardFooter className="text-xs text-gray-500">
+        <CardFooter className="text-xs text-gray-500 dark:text-gray-400">
           {formatRelativeTime(new Date(createdAt))}
         </CardFooter>
       </Card>

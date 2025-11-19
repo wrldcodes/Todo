@@ -17,13 +17,18 @@ const IssueSchema = z.object({
 
   description: z.string().optional().nullable(),
 
-  status: z.enum(['backlog', 'todo', 'in_progress', 'done'], {
-    errorMap: () => ({ message: 'Please select a valid status' }),
-  }),
+  status: z
+    .enum(['backlog', 'todo', 'in_progress', 'done'])
+    .refine((val) => ['backlog', 'todo', 'in_progress', 'done'].includes(val), {
+      message: 'Please select a valid status',
+    }),
 
-  priority: z.enum(['low', 'medium', 'high'], {
-    errorMap: () => ({ message: 'Please select a valid priority' }),
-  }),
+  priority: z
+    .enum(['low', 'medium', 'high'])
+    .refine((val) => ['low', 'medium', 'high'].includes(val), {
+      message: 'Please select a valid priority',
+    }),
+
   userId: z.string().min(1, 'User ID is required'),
 });
 
@@ -47,7 +52,6 @@ export async function createIssue(data: IssueData): Promise<ActionResponse> {
         error: 'Unauthorized',
       };
     }
-      
 
     // Validate with Zod
     const validationResult = IssueSchema.safeParse(data);
@@ -68,8 +72,8 @@ export async function createIssue(data: IssueData): Promise<ActionResponse> {
       priority: validatedData.priority,
       userId: validatedData.userId,
     });
-    revalidateTag('issues', 'max')
-    
+    revalidateTag('issues', 'max');
+
     return { success: true, message: 'Issue created successfully' };
   } catch (error) {
     console.error('Error creating issue:', error);

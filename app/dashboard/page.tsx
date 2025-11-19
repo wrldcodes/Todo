@@ -13,7 +13,7 @@ export default async function DashboardPage() {
   return (
     <div>
       <div className="flex items-center justify-between mb-8">
-        <h1 className="text-2xl font-bold">Issues</h1>
+        <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Issues</h1>
         <Link href="/issues/new">
           <Button>
             <span className="flex items-center">
@@ -25,9 +25,9 @@ export default async function DashboardPage() {
       </div>
 
       {issues.length > 0 ? (
-        <div className="overflow-hidden rounded-lg border border-gray-200 dark:border-dark-border-default bg-white dark:bg-dark-high shadow-sm">
+        <div className="overflow-hidden rounded-lg border border-gray-200 dark:border-dark-border-subtle bg-white dark:bg-[#121212] shadow-sm">
           {/* Header row */}
-          <div className="grid grid-cols-12 gap-4 px-6 py-3 text-sm font-medium text-gray-500 dark:text-gray-400 bg-gray-50 dark:bg-dark-elevated border-b border-gray-200 dark:border-dark-border-default">
+          <div className="grid grid-cols-12 gap-4 px-6 py-3 text-sm font-medium text-gray-500 dark:text-gray-400 bg-gray-50 dark:bg-[#1a1a1a] border-b border-gray-200 dark:border-dark-border-subtle">
             <div className="col-span-5">Title</div>
             <div className="col-span-2">Status</div>
             <div className="col-span-2">Priority</div>
@@ -35,15 +35,17 @@ export default async function DashboardPage() {
           </div>
 
           {/* Issue rows */}
-          <div className="divide-y divide-gray-200 dark:divide-dark-border-default">
+          <div className=" divide-y divide-gray-200 dark:divide-dark-border-subtle">
             {issues.map((issue) => (
               <Link
                 key={issue.id}
                 href={`/issues/${issue.id}`}
-                className="block hover:bg-gray-50 dark:hover:bg-dark-elevated transition-colors"
+                className="block hover:bg-gray-50 dark:hover:bg-[#1a1a1a] transition-colors"
               >
                 <div className="grid grid-cols-12 gap-4 px-6 py-4 items-center">
-                  <div className="col-span-5 font-medium truncate">{issue.title}</div>
+                  <div className="col-span-5 font-medium truncate text-gray-900 dark:text-gray-100">
+                    {issue.title}
+                  </div>
                   <div className="col-span-2">
                     <Badge status={issue.status as Status}>
                       {ISSUE_STATUS[issue.status as Status].label}
@@ -63,8 +65,10 @@ export default async function DashboardPage() {
           </div>
         </div>
       ) : (
-        <div className="flex flex-col items-center justify-center py-12 text-center border border-gray-200 dark:border-dark-border-default rounded-lg bg-white dark:bg-dark-high p-8">
-          <h3 className="text-lg font-medium mb-2">No issues found</h3>
+        <div className="flex flex-col items-center justify-center py-12 text-center border border-gray-200 dark:border-dark-border-subtle rounded-lg bg-white dark:bg-[#121212] p-8">
+          <h3 className="text-lg font-medium mb-2 text-gray-900 dark:text-white">
+            No issues found
+          </h3>
           <p className="text-gray-500 dark:text-gray-400 mb-6">
             Get started by creating your first issue.
           </p>

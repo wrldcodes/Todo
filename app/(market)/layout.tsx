@@ -5,20 +5,29 @@ import Button from '../components/ui/Button';
 export default async function MarketingLayout({ children }: { children: React.ReactNode }) {
   return (
     <div className="flex min-h-screen flex-col">
-      <header className="border-b border-gray-200 dark:border-dark-border-subtle bg-white dark:bg-dark-base">
+      <header className="border-b border-gray-200 dark:border-dark-border-subtle bg-white dark:bg-[#121212]">
         <div className="container mx-auto flex h-16 items-center justify-between px-4">
           <div className="flex items-center gap-8">
-            <Link href="/" className="text-xl font-bold">
+            <Link href="/" className="text-xl font-bold text-gray-900 dark:text-white">
               Mode
             </Link>
             <nav className="hidden md:flex gap-6">
-              <Link href="/features" className="text-sm font-medium hover:text-purple-600">
+              <Link
+                href="/features"
+                className="text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400"
+              >
                 Features
               </Link>
-              <Link href="/pricing" className="text-sm font-medium hover:text-purple-600">
+              <Link
+                href="/pricing"
+                className="text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400"
+              >
                 Pricing
               </Link>
-              <Link href="/faq" className="text-sm font-medium hover:text-purple-600">
+              <Link
+                href="/faq"
+                className="text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400"
+              >
                 FAQ
               </Link>
             </nav>
@@ -38,40 +47,54 @@ export default async function MarketingLayout({ children }: { children: React.Re
 
       <main className="flex-1">{children}</main>
 
-      <footer className="border-t border-gray-200 dark:border-dark-border-subtle bg-white dark:bg-dark-base">
+      <footer className="border-t border-gray-200 dark:border-dark-border-subtle bg-white dark:bg-[#121212]">
         <div className="container mx-auto px-4 py-8">
           <div className="grid grid-cols-1 gap-8 md:grid-cols-4">
             <div>
-              <h3 className="text-lg font-semibold mb-4">Mode</h3>
-              <p className="text-sm text-gray-600">
+              <h3 className="text-lg font-semibold mb-4 text-gray-900 dark:text-white">Mode</h3>
+              <p className="text-sm text-gray-600 dark:text-gray-400">
                 A modern project management tool built with Next.js.
               </p>
             </div>
             <div>
-              <h3 className="text-sm font-semibold mb-4">Product</h3>
+              <h3 className="text-sm font-semibold mb-4 text-gray-900 dark:text-white">Product</h3>
               <ul className="space-y-2">
                 <li>
-                  <Link href="/features" className="text-sm text-gray-600 hover:text-purple-600">
+                  <Link
+                    href="/features"
+                    className="text-sm text-gray-600 dark:text-gray-400 hover:text-purple-600 dark:hover:text-purple-400"
+                  >
                     Features
                   </Link>
                 </li>
                 <li>
-                  <Link href="/pricing" className="text-sm text-gray-600 hover:text-purple-600">
+                  <Link
+                    href="/pricing"
+                    className="text-sm text-gray-600 dark:text-gray-400 hover:text-purple-600 dark:hover:text-purple-400"
+                  >
                     Pricing
                   </Link>
                 </li>
                 <li>
-                  <Link href="/faq" className="text-sm text-gray-600 hover:text-purple-600">
+                  <Link
+                    href="/faq"
+                    className="text-sm text-gray-600 dark:text-gray-400 hover:text-purple-600 dark:hover:text-purple-400"
+                  >
                     FAQ
                   </Link>
                 </li>
               </ul>
             </div>
             <div>
-              <h3 className="text-sm font-semibold mb-4">Resources</h3>
+              <h3 className="text-sm font-semibold mb-4 text-gray-900 dark:text-white">
+                Resources
+              </h3>
               <ul className="space-y-2">
                 <li>
-                  <Link href="/docs" className="text-sm text-gray-600 hover:text-purple-600">
+                  <Link
+                    href="/docs"
+                    className="text-sm text-gray-600 dark:text-gray-400 hover:text-purple-600 dark:hover:text-purple-400"
+                  >
                     Documentation
                   </Link>
                 </li>
@@ -80,7 +103,7 @@ export default async function MarketingLayout({ children }: { children: React.Re
                     href="https://github.com/yourusername/mode"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-sm text-gray-600 hover:text-purple-600"
+                    className="text-sm text-gray-600 dark:text-gray-400 hover:text-purple-600 dark:hover:text-purple-400"
                   >
                     GitHub
                   </a>
@@ -88,18 +111,21 @@ export default async function MarketingLayout({ children }: { children: React.Re
               </ul>
             </div>
             <div>
-              <h3 className="text-sm font-semibold mb-4">Legal</h3>
+              <h3 className="text-sm font-semibold mb-4 text-gray-900 dark:text-white">Legal</h3>
               <ul className="space-y-2">
                 <li>
-                  <Link href="/terms" className="text-sm text-gray-600 hover:text-purple-600">
+                  <Link
+                    href="/terms"
+                    className="text-sm text-gray-600 dark:text-gray-400 hover:text-purple-600 dark:hover:text-purple-400"
+                  >
                     Terms of Service
                   </Link>
                 </li>
               </ul>
             </div>
           </div>
-          <div className="mt-8 border-t pt-8 text-center">
-            <p className="text-sm text-gray-600">
+          <div className="mt-8 border-t border-gray-200 dark:border-dark-border-subtle pt-8 text-center">
+            <p className="text-sm text-gray-600 dark:text-gray-400">
               &copy; <Timestamp /> Mode. All rights reserved.
             </p>
           </div>
