@@ -1,5 +1,5 @@
 import { getIssue } from '@/lib/dal';
-import { formatRelativeTime } from '@/lib/utils';
+import { RelativeTime } from '@/app/components/RelativeTime';
 import { Priority, Status } from '@/lib/types';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
@@ -78,11 +78,11 @@ export default async function IssuePage({ params }: { params: Promise<{ id: stri
           <Badge status={status as Status}>{getStatusLabel(status)}</Badge>
           <Badge priority={priority as Priority}>{getPriorityLabel(priority)}</Badge>
           <div className="text-sm text-gray-500 dark:text-gray-400">
-            Created {formatRelativeTime(new Date(createdAt))}
+            Created <RelativeTime date={issue.createdAt} />
           </div>
           {updatedAt !== createdAt && (
             <div className="text-sm text-gray-500 dark:text-gray-400">
-              Updated {formatRelativeTime(new Date(updatedAt))}
+              Updated <RelativeTime date={issue.updatedAt} />
             </div>
           )}
         </div>
@@ -114,7 +114,7 @@ export default async function IssuePage({ params }: { params: Promise<{ id: stri
           <div>
             <p className="text-sm font-medium text-gray-500 dark:text-gray-400 mb-1">Created</p>
             <p className="text-gray-900 dark:text-white">
-              {formatRelativeTime(new Date(createdAt))}
+              <RelativeTime date={issue.createdAt} />
             </p>
           </div>
         </div>

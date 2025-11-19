@@ -8,10 +8,10 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 // Format date to relative time (e.g., "2 days ago")
-export function formatRelativeTime(date: Date | string) {
-  const parsedDate = typeof date === 'string' ? new Date(date) : date
-  return formatDistanceToNow(parsedDate, { addSuffix: true })
-}
+// export function formatRelativeTime(date: Date | string) {
+//   const parsedDate = typeof date === 'string' ? new Date(date) : date
+//   return formatDistanceToNow(parsedDate, { addSuffix: true })
+// }
 
 // Simple validation check for email
 export function isValidEmail(email: string) {

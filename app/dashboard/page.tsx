@@ -4,15 +4,15 @@ import Link from 'next/link';
 import Button from '../components/ui/Button';
 import { PlusIcon } from 'lucide-react';
 import Badge from '../components/ui/Badge';
-import { formatRelativeTime } from '@/lib/utils';
+import { RelativeTime } from '../components/RelativeTime';
 import { Priority, Status } from '@/lib/types';
 import { ISSUE_STATUS, ISSUE_PRIORITY } from '@/db/schema';
-
+import { getCurrentUser } from '@/lib/dal';
 
 
 export default async function DashboardPage() {
   const issues = await getIssues();
-
+   await getCurrentUser();
   return (
     <div>
       <div className="flex items-center justify-between mb-8">
@@ -60,7 +60,7 @@ export default async function DashboardPage() {
                     </Badge>
                   </div>
                   <div className="col-span-3 text-sm text-gray-500 dark:text-gray-400">
-                    {formatRelativeTime(new Date(issue.createdAt))}
+                    <RelativeTime date={issue.createdAt} />
                   </div>
                 </div>
               </Link>

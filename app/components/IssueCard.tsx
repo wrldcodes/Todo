@@ -1,5 +1,5 @@
 import { Issue } from '@/db/schema'
-import { formatRelativeTime } from '@/lib/utils'
+import { RelativeTime } from '../components/RelativeTime';
 import { Priority, Status } from '@/lib/types'
 import Link from 'next/link'
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from './ui/Card'
@@ -44,7 +44,9 @@ export default function IssueCard({ issue }: IssueCardProps) {
     <Link href={`/issues/${id}`}>
       <Card className="h-full hover:shadow-md transition-shadow cursor-pointer">
         <CardHeader className="pb-2">
-          <CardTitle className="line-clamp-1 text-base text-gray-900 dark:text-white">{title}</CardTitle>
+          <CardTitle className="line-clamp-1 text-base text-gray-900 dark:text-white">
+            {title}
+          </CardTitle>
         </CardHeader>
         <CardContent className="pb-2">
           {description && (
@@ -54,15 +56,13 @@ export default function IssueCard({ issue }: IssueCardProps) {
           )}
           <div className="flex flex-wrap gap-2">
             <Badge status={status as Status}>{getStatusLabel(status)}</Badge>
-            <Badge priority={priority as Priority}>
-              {getPriorityLabel(priority)}
-            </Badge>
+            <Badge priority={priority as Priority}>{getPriorityLabel(priority)}</Badge>
           </div>
         </CardContent>
         <CardFooter className="text-xs text-gray-500 dark:text-gray-400">
-          {formatRelativeTime(new Date(createdAt))}
+          <RelativeTime date={issue.createdAt} />
         </CardFooter>
       </Card>
     </Link>
-  )
+  );
 }
