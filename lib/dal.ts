@@ -7,7 +7,7 @@ import { issues, users } from '@/db/schema';
 import { mockDelay } from './utils';
 
 
-export const runtime = 'nodejs'
+
 mockDelay(700);
 // Current user
 export const getCurrentUser = cache(async () => {

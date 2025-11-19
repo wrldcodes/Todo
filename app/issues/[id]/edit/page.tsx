@@ -5,8 +5,9 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 
 export default async function EditIssuePage({ params }: { params: Promise<{ id: string }> }) {
+ 
   const { id } = await params;
-  
+
   const issue = await getIssue(parseInt(id));
 
   if (!issue) {

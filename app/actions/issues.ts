@@ -6,7 +6,7 @@ import { issues } from '@/db/schema';
 import { eq } from 'drizzle-orm';
 import { getCurrentUser } from '@/lib/dal';
 import { z } from 'zod';
-import { mockDelay } from '../utils';
+import { mockDelay } from '../../lib/utils';
 
 // Define Zod schema for issue validation
 const IssueSchema = z.object({
@@ -136,7 +136,7 @@ export async function updateIssue(id: number, data: Partial<IssueData>): Promise
 export async function deleteIssue(id: number) {
   try {
     // Security check - ensure user is authenticated
-    await mockDelay(700);
+    
     const user = await getCurrentUser();
     if (!user) {
       throw new Error('Unauthorized');
