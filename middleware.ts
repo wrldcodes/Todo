@@ -16,6 +16,7 @@ export function middleware(request: NextRequest) {
 
     // You can add additional authorization logic here
     // For example, validate JWT tokens, check specific auth schemes, etc.
+    
   }
 
   // Continue with the request for non-API routes or if authorization is valid

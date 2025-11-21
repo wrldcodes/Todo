@@ -7,12 +7,13 @@ import Badge from '../components/ui/Badge';
 import { RelativeTime } from '../components/RelativeTime';
 import { Priority, Status } from '@/lib/types';
 import { ISSUE_STATUS, ISSUE_PRIORITY } from '@/db/schema';
-import { getCurrentUser } from '@/lib/dal';
+
 
 
 export default async function DashboardPage() {
+  
   const issues = await getIssues();
-   await getCurrentUser();
+   
   return (
     <div>
       <div className="flex items-center justify-between mb-8">

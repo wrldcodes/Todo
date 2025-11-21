@@ -56,28 +56,16 @@ export async function signIn(formData: FormData): Promise<ActionResponse> {
     }
 
     // Find user by email
-    let user;
-    try {
-      user = await getUserByEmail(data.email);
-    } catch (error: any) {
-      console.error('Error fetching user during sign in:', error);
-      return {
-        success: false,
-        message: error?.message || 'Database error. Please try again.',
-        error: error?.message || 'Database connection error',
-      };
-    }
-
-    if (!user) {
-      return {
-        success: false,
-        message: 'Invalid email or password',
-        errors: {
-          email: ['Invalid email or password'],
-        },
-      };
-    }
-
+     const user = await getUserByEmail(data.email);
+     if (!user) {
+       return {
+         success: false,
+         message: 'Invalid email or password',
+         errors: {
+           email: ['Invalid email or password'],
+         },
+       };
+     }
     // Verify password
     const isPasswordValid = await verifyPassword(data.password, user.password);
     if (!isPasswordValid) {
@@ -128,20 +116,8 @@ export async function signUp(formData: FormData): Promise<ActionResponse> {
         errors: validationResult.error.flatten().fieldErrors,
       };
     }
-
     // Check if user already exists
-    let existingUser;
-    try {
-      existingUser = await getUserByEmail(data.email);
-    } catch (error: any) {
-      console.error('Error checking existing user:', error);
-      return {
-        success: false,
-        message: error?.message || 'Database error while checking user',
-        error: error?.message || 'Database connection error',
-      };
-    }
-
+    const existingUser = await getUserByEmail(data.email);
     if (existingUser) {
       return {
         success: false,
@@ -153,33 +129,7 @@ export async function signUp(formData: FormData): Promise<ActionResponse> {
     }
 
     // Create new user
-    let user;
-    try {
-      user = await createUser(data.email, data.password);
-    } catch (error: any) {
-      console.error('Error creating user:', error);
-      // Check if it's a unique constraint violation (duplicate email)
-      if (
-        error?.code === '23505' ||
-        error?.message?.includes('unique') ||
-        error?.message?.includes('duplicate')
-      ) {
-        return {
-          success: false,
-          message: 'User with this email already exists',
-          errors: {
-            email: ['User with this email already exists'],
-          },
-        };
-      }
-      // Other database errors
-      return {
-        success: false,
-        message: 'Failed to create user. Please try again.',
-        error: error?.message || 'Database error',
-      };
-    }
-
+    const user = await createUser(data.email, data.password);
     if (!user) {
       return {
         success: false,

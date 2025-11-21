@@ -12,15 +12,10 @@ interface JWTPayload {
   [key: string]: string | number | boolean | null | undefined;
 }
 
-const rawJwtSecret = process.env.JWT_SECRET;
-if (!rawJwtSecret || rawJwtSecret.length < 32) {
-  throw new Error(
-    'JWT_SECRET is not set or is shorter than 32 characters. Please configure it in your environment.'
-  );
-}
-
-// Secret key for JWT signing (server-only)
-const JWT_SECRET = new TextEncoder().encode(rawJwtSecret);
+// Secret key for JWT signing (in a real app, use an environment variable)
+const JWT_SECRET = new TextEncoder().encode(
+  process.env.JWT_SECRET 
+);
 
 // JWT expiration time
 const JWT_EXPIRATION = '7d'; // 7 days
@@ -40,10 +35,10 @@ export async function verifyPassword(password: string, hashedPassword: string) {
 
 // Create a new user
 export async function createUser(email: string, password: string) {
-  try {
-    const hashedPassword = await hashPassword(password);
-    const id = nanoid();
+  const hashedPassword = await hashPassword(password);
+  const id = nanoid();
 
+  try {
     await db.insert(users).values({
       id,
       email,
@@ -53,9 +48,7 @@ export async function createUser(email: string, password: string) {
     return { id, email };
   } catch (error) {
     console.error('Error creating user:', error);
-    // Re-throw to allow proper error handling upstream
-    // This helps identify if it's a duplicate email, database connection issue, etc.
-    throw error;
+    return null;
   }
 }
 
@@ -71,8 +64,7 @@ export async function generateJWT(payload: JWTPayload) {
 // Verify a JWT token
 export async function verifyJWT(token: string): Promise<JWTPayload | null> {
   try {
-    const secret = new TextEncoder().encode(process.env.JWT_SECRET!);
-    const { payload } = await jose.jwtVerify(token, secret);
+    const { payload } = await jose.jwtVerify(token, JWT_SECRET);
     return payload as JWTPayload;
   } catch (error) {
     console.error('JWT verification failed:', error);

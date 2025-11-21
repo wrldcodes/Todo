@@ -1,30 +1,31 @@
-import { NextResponse } from 'next/server';
+import { NextResponse, NextRequest } from 'next/server';
 import { db } from '@/db';
 import { issues } from '@/db/schema';
 import { eq } from 'drizzle-orm';
-
-
-type IssueRouteContext = {
-  params: Promise<{ id: string }>;
-};
-
-// This route now treats `[id]` as a *userId* and returns the first issue for that user.
-// If you want all issues for a user instead of just one, we can adjust this further.
-export async function GET(request: Request, { params }: IssueRouteContext) {
+import { getSession } from '@/lib/auth';
+export async function GET(request: NextRequest, { params }: { params: { id: string } }) {
   try {
-    const { id } = await params;
-
-    const issue = await db.query.issues.findFirst({
-      where: eq(issues.userId, id),
-    });
-
-    if (!issue) {
-      return NextResponse.json({ error: 'Issue not found' }, { status: 404 });
-    }
-
-    return NextResponse.json(issue);
-  } catch (error) {
-    console.error('Error fetching issue:', error);
-    return NextResponse.json({ error: 'Failed to fetch issue' }, { status: 500 });
+    const id = params.id;
+    const session = await getSession();
+  if (!session) {
+  return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
+
+  const issue = await db.query.issues.findFirst({
+  where: (i, { eq, and }) =>
+    and(eq(i.id, parseInt(id)), eq(i.userId, session.userId)),
+  });
+  //   const issue = await db.query.issues.findFirst({
+  //     where: eq(issues.id, parseInt(id)),
+  //   });
+
+  //   if (!issue) {
+  //     return NextResponse.json({ error: 'Issue not found' }, { status: 404 });
+  //   }
+
+  //   return NextResponse.json(issue);
+  // } catch (error) {
+  //   console.error('Error fetching issue:', error);
+  //   return NextResponse.json({ error: 'Failed to fetch issue' }, { status: 500 });
+  // }
 }

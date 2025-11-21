@@ -44,6 +44,7 @@ export type ActionResponse = {
 export async function createIssue(data: IssueData): Promise<ActionResponse> {
   try {
     // Security check - ensure user is authenticated
+    await mockDelay(700);
     const user = await getCurrentUser();
     if (!user) {
       return {
@@ -71,6 +72,7 @@ export async function createIssue(data: IssueData): Promise<ActionResponse> {
       status: validatedData.status,
       priority: validatedData.priority,
       userId: validatedData.userId,
+      
     });
     revalidateTag('issues', 'max');
 
