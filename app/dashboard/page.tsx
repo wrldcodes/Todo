@@ -1,5 +1,4 @@
-
-import { getIssues } from '@/lib/dal';
+import { getIssues, getCurrentUser } from '@/lib/dal';
 import Link from 'next/link';
 import Button from '../components/ui/Button';
 import { PlusIcon } from 'lucide-react';
@@ -8,12 +7,9 @@ import { RelativeTime } from '../components/RelativeTime';
 import { Priority, Status } from '@/lib/types';
 import { ISSUE_STATUS, ISSUE_PRIORITY } from '@/db/schema';
 
-
-
 export default async function DashboardPage() {
-  
-  const issues = await getIssues();
-   
+  const user = await getCurrentUser();
+  const issues = user ? await getIssues(user.id) : [];
   return (
     <div>
       <div className="flex items-center justify-between mb-8">

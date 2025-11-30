@@ -34,7 +34,7 @@ export const getUserByEmail = cache(async (email: string) => {
     const user = await db.query.users.findFirst({
       where: eq(users.email, email),
     });
-    return user 
+    return user;
     // const result = await db.queryselect().from(users).where(eq(users.email, email));
     // return result[0] || null;
   } catch (error) {
@@ -60,12 +60,12 @@ export async function getIssue(id: number) {
   }
 }
 
-export async function getIssues() {
+export async function getIssues(userId?: string) {
   'use cache';
-  
   try {
     await mockDelay(700);
     const result = await db.query.issues.findMany({
+      where: userId ? eq(issues.userId, userId) : undefined,
       with: {
         user: true,
       },
