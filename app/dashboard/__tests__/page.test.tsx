@@ -13,14 +13,11 @@ vi.mock('@/lib/dal', () => ({
 
 // Mock Next.js components
 vi.mock('next/link', () => ({
-  default: ({
-        href: string 
-    
-  }) => (
-    <a href={href} data-testid="next-link">
-      {children}
-    </a>
-  ),
+  default: ({ href, children }: { href: string; children: React.ReactNode }) => (
+  <a href={href} data-testid="next-link">
+    {children}
+  </a>
+),
 }))
 // vi.mock('next/link', () => {
 //   return {
