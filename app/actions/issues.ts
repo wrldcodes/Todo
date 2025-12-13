@@ -72,9 +72,8 @@ export async function createIssue(data: IssueData): Promise<ActionResponse> {
       status: validatedData.status,
       priority: validatedData.priority,
       userId: validatedData.userId,
-      
     });
-    revalidateTag('issues', 'max');
+    revalidateTag('issues');
 
     return { success: true, message: 'Issue created successfully' };
   } catch (error) {
@@ -138,7 +137,7 @@ export async function updateIssue(id: number, data: Partial<IssueData>): Promise
 export async function deleteIssue(id: number) {
   try {
     // Security check - ensure user is authenticated
-    
+
     const user = await getCurrentUser();
     if (!user) {
       throw new Error('Unauthorized');
